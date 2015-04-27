@@ -27,7 +27,7 @@ namespace FluxSharp.Components
                 var incomplete = items.Count() - completed;
 
                 counter.Text = string.Format("{0} item{1} left",
-                    incomplete, incomplete > 1 ? "s" : "");
+                    incomplete, incomplete == 1 ? "" : "s");
 
                 clear.Visibility = completed > 0 ? Visibility.Visible : Visibility.Collapsed;
 
