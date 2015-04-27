@@ -31,7 +31,7 @@ namespace FluxSharp.Components
 
                 clear.Visibility = completed > 0 ? Visibility.Visible : Visibility.Collapsed;
 
-                if (completed > 0)
+                if (clear.IsVisible)
                 {
                     clear.Events().Click.Subscribe(_ =>
                     {
