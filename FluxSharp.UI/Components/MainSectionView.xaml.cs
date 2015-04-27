@@ -2,7 +2,6 @@
 using FluxSharp.Abstractions;
 using FluxSharp.Stores;
 using FluxSharp.UI;
-using Splat;
 
 namespace FluxSharp.Components
 {
@@ -17,8 +16,6 @@ namespace FluxSharp.Components
                 return;
             }
 
-            Store = Locator.Current.GetService(typeof(ToDoStore)) as ToDoStore;
-            
             this.OnChange(store =>
             {
                 todos.ItemsSource = store.GetAll();
@@ -27,7 +24,5 @@ namespace FluxSharp.Components
             // lol setup hax
             this.EmitChange();
         }
-
-        public ToDoStore Store { get; private set; }
     }
 }

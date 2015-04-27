@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using FluxSharp.Abstractions;
+using FluxSharp.Stores;
 using Splat;
 
 namespace FluxSharp.UI
@@ -10,6 +11,7 @@ namespace FluxSharp.UI
         public static void OnChange<T>(this IFluxViewFor<T> view, Action<T> callback) where T : Store
         {
             var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
+            var store = Locator.Current.GetService(typeof(T)) as T;
 
             if (appDispatcher == null)
             {
@@ -18,7 +20,7 @@ namespace FluxSharp.UI
             }
 
             appDispatcher.Register<ChangePayload>(
-                payload => callback(view.Store));
+                payload => callback(store));
         }
 
         public static void OnUpdated<T>(this IFluxControl view, Action<T> callback) where T : class
