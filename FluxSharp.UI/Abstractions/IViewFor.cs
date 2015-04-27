@@ -10,8 +10,7 @@ namespace FluxSharp.UI
     {
         public static void OnChange<T>(this IFluxViewFor<T> view, Action<T> callback) where T : Store
         {
-            var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
-            var store = Locator.Current.GetService(typeof(T)) as T;
+            var appDispatcher = Locator.Current.GetService<Dispatcher>();
 
             if (appDispatcher == null)
             {
@@ -19,8 +18,8 @@ namespace FluxSharp.UI
                 return;
             }
 
-            appDispatcher.Register<ChangePayload>(
-                payload => callback(store));
+            var lazyStore = new Lazy<T>(() => Locator.Current.GetService<T>());
+            appDispatcher.Register<ChangePayload>(payload => callback(lazyStore.Value));
         }
 
         public static void OnUpdated<T>(this IFluxControl view, Action<T> callback) where T : class
@@ -41,8 +40,7 @@ namespace FluxSharp.UI
 
         public static void Dispatch<TView,TPayload>(this IFluxViewFor<TView> view, TPayload payload) where TView : Store
         {
-            var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
-
+            var appDispatcher = Locator.Current.GetService<Dispatcher>();
             if (appDispatcher == null)
             {
                 // TODO: we should fail the app
@@ -59,8 +57,7 @@ namespace FluxSharp.UI
 
         public static void Dispatch<TPayload>(this IFluxControl view, TPayload payload)
         {
-            var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
-
+            var appDispatcher = Locator.Current.GetService<Dispatcher>();
             if (appDispatcher == null)
             {
                 // TODO: we should fail the app
@@ -69,7 +66,5 @@ namespace FluxSharp.UI
 
             appDispatcher.Dispatch(payload);
         }
-
     }
-
 }
