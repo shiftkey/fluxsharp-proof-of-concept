@@ -93,6 +93,10 @@
     <Compile Include="Actions\ToggleAllCompletedAction.cs" />
     <Compile Include="Actions\UncheckedItemAction.cs" />
     <Compile Include="Actions\UpdateTextAction.cs" />
+    <Compile Include="Actions\ClearCompletedTasksAction.cs" />
+    <Compile Include="Components\FooterView.xaml.cs">
+      <DependentUpon>FooterView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Components\HeaderView.xaml.cs">
       <DependentUpon>HeaderView.xaml</DependentUpon>
     </Compile>
@@ -109,6 +113,10 @@
     <Compile Include="Components\ToDoView.xaml.cs">
       <DependentUpon>ToDoView.xaml</DependentUpon>
     </Compile>
+    <Page Include="Components\FooterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Components\HeaderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

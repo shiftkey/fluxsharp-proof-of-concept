@@ -10,10 +10,11 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <components:HeaderView x:Name="header" />
-        <components:MainSectionView x:Name="main" Grid.Row="1" />
-
+        <components:HeaderView />
+        <components:MainSectionView Grid.Row="1" />
+        <components:FooterView Grid.Row="2" />
     </Grid>
 </UserControl>
