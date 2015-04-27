@@ -44,7 +44,7 @@ namespace FluxSharp.UI.Components
                 allChecked.IsChecked = allTasksChecked;
 
                 var allCheckedDisp = allTasksChecked
-                    ? Observable.FromEventPattern<RoutedEventArgs>(allChecked, "UnChecked")
+                    ? Observable.FromEventPattern<RoutedEventArgs>(allChecked, "Unchecked")
                         .Subscribe(_ => AppDispatcher.Dispatch(new ToggleAllCompletedAction(false)))
                     : Observable.FromEventPattern<RoutedEventArgs>(allChecked, "Checked")
                         .Subscribe(_ => AppDispatcher.Dispatch(new ToggleAllCompletedAction(true)));

@@ -64,9 +64,13 @@ namespace FluxSharp.UI.Stores
                 });
 
             AppDispatcher.Register<ToggleAllCompletedAction>(
-                allCompleted =>
+                action =>
                 {
-
+                    foreach(var item in items)
+                    {
+                        item.Value.IsComplete = action.IsCompleted;
+                    }
+                    EmitChange();
                 });
         }
 
