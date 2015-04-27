@@ -76,7 +76,7 @@ namespace FluxSharp.Stores
 
         public bool GetAllChecked()
         {
-            return items.Values.All(a => a.IsComplete);
+            return items.Any() && items.Values.All(a => a.IsComplete);
         }
 
         public IEnumerable<ToDoItem> GetAll()
@@ -106,5 +106,4 @@ namespace FluxSharp.Stores
             items[id] = item;
         }
     }
-
 }
