@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FluxSharp.UI.Actions;
 
 namespace FluxSharp.UI.Stores
@@ -37,6 +38,7 @@ namespace FluxSharp.UI.Stores
                             System.Diagnostics.Debug.Fail("Item is not in a valid state for this action");
                         }
                         found.IsComplete = true;
+                        EmitChange();
                     }
                 });
 
@@ -51,6 +53,7 @@ namespace FluxSharp.UI.Stores
                             System.Diagnostics.Debug.Fail("Item is not in a valid state for this action");
                         }
                         found.IsComplete = false;
+                        EmitChange();
                     }
                 });
 
@@ -69,7 +72,7 @@ namespace FluxSharp.UI.Stores
 
         internal IEnumerable<ToDoItem> GetAll()
         {
-            return items.Values;
+            return items.Values.ToList();
         }
 
         string text = "";

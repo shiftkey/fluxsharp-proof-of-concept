@@ -21,6 +21,7 @@ namespace FluxSharp.UI.Components
             this.WhenActivated(d =>
             {
                 d(this.OneWayBind(ViewModel, vm => vm.Text, v => v.text.Text));
+                d(this.OneWayBind(ViewModel, vm => vm.IsComplete, v => v.isChecked.IsChecked));
 
                 // TODO: we should only need to bind one callback here
 
