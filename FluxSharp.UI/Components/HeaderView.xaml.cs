@@ -59,6 +59,6 @@ namespace FluxSharp.Components
             Store.EmitChange();
         }
 
-        public ToDoStore Store { get; set; }
+        public ToDoStore Store { get; private set; }
     }
 }

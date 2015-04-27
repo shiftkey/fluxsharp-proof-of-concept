@@ -6,14 +6,14 @@
              xmlns:components="clr-namespace:FluxSharp.Components"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid x:Name="contents">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        
+
         <components:HeaderView x:Name="header" />
         <components:MainSectionView x:Name="main" Grid.Row="1" />
-            
+
     </Grid>
 </UserControl>

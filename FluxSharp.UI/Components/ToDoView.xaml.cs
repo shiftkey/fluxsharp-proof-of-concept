@@ -18,18 +18,12 @@ namespace FluxSharp.Components
             }
 
             Store = Locator.Current.GetService(typeof(ToDoStore)) as ToDoStore;
-            AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
-
-            header.Store = Store;
-            main.Store = Store;
 
             this.OnChange(store =>
             {
-                // TODO: ???
+                // TODO: anything important here?
             });
         }
-
-        public Dispatcher AppDispatcher { get; private set; }
 
         public ToDoStore Store { get; set; }
     }
