@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using FluxSharp.Abstractions;
 using FluxSharp.Stores;
-using FluxSharp.UI;
 
 namespace FluxSharp.Components
 {
@@ -20,9 +19,6 @@ namespace FluxSharp.Components
             {
                 todos.ItemsSource = store.GetAll();
             });
-
-            // lol setup hax
-            this.EmitChange();
         }
     }
 }

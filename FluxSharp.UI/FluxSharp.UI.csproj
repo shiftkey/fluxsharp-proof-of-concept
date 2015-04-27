@@ -103,7 +103,7 @@
       <DependentUpon>ToDoItemView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Abstractions\Store.cs" />
-    <Compile Include="Abstractions\IViewFor.cs" />
+    <Compile Include="Abstractions\FrameworkElementExtensions.cs" />
     <Compile Include="Stores\ToDoItem.cs" />
     <Compile Include="Stores\ToDoStore.cs" />
     <Compile Include="Components\ToDoView.xaml.cs">

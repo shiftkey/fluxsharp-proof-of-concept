@@ -5,7 +5,6 @@ using System.Windows;
 using FluxSharp.Abstractions;
 using FluxSharp.Actions;
 using FluxSharp.Stores;
-using FluxSharp.UI;
 
 namespace FluxSharp.Components
 {

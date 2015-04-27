@@ -7,7 +7,6 @@ using System.Windows.Input;
 using FluxSharp.Abstractions;
 using FluxSharp.Actions;
 using FluxSharp.Stores;
-using FluxSharp.UI;
 
 namespace FluxSharp.Components
 {
@@ -50,9 +49,6 @@ namespace FluxSharp.Components
                         .Subscribe(_ => this.Dispatch(new CreateItemAction(newToDo.Text))),
                     allCheckedDisp);
             });
-
-            // lol setup hax
-            this.EmitChange();
         }
     }
 }
