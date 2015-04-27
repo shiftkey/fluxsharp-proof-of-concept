@@ -26,6 +26,8 @@ namespace FluxSharp.Components
 
             this.OnChange(store =>
             {
+                disposable.Disposable = Disposable.Empty;
+
                 newToDo.Text = store.GetText();
 
                 var createTextObs = Observable.Merge(
