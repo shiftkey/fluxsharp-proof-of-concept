@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace FluxSharp.UI
+namespace FluxSharp.Abstractions
 {
     public class Dispatcher
     {
-        Dictionary<Type, List<object>> callbacks
+        readonly Dictionary<Type, List<object>> callbacks
             = new Dictionary<Type, List<object>>();
 
         public void Register<T>(Action<T> callback)

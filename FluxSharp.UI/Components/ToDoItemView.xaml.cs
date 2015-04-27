@@ -2,20 +2,22 @@
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
-using FluxSharp.UI.Actions;
-using FluxSharp.UI.Stores;
+using FluxSharp.Abstractions;
+using FluxSharp.Actions;
+using FluxSharp.Stores;
+using FluxSharp.UI;
 
-namespace FluxSharp.UI.Components
+namespace FluxSharp.Components
 {
-    public partial class ToDoItemView : IFluxControl<ToDoItem>
+    public partial class ToDoItemView : IFluxControl
     {
         public ToDoItemView()
         {
             InitializeComponent();
-            
-            SerialDisposable disposable = new SerialDisposable();
 
-            this.OnUpdated(viewModel =>
+            var disposable = new SerialDisposable();
+
+            this.OnUpdated<ToDoItem>(viewModel =>
             {
                 text.Text = viewModel.Text;
                 isChecked.IsChecked = viewModel.IsComplete;

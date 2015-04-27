@@ -1,11 +1,11 @@
-﻿using System;
+﻿using FluxSharp.UI;
 using Splat;
 
-namespace FluxSharp.UI
+namespace FluxSharp.Abstractions
 {
     public abstract class DataStore
     {
-        public DataStore()
+        protected DataStore()
         {
             AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
         }

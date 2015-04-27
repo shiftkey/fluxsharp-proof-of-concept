@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
 
-namespace FluxSharp.UI
+namespace FluxSharp.Abstractions
 {
     public static class ObservableExtensions
     {

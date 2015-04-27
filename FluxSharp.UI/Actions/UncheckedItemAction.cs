@@ -1,8 +1,8 @@
 ﻿namespace FluxSharp.Actions
 {
-    public class CheckedItemAction
+    public class UncheckedItemAction
     {
-        public CheckedItemAction(string id)
+        public UncheckedItemAction(string id)
         {
             Id = id;
         }

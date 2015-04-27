@@ -1,9 +1,10 @@
-﻿using System;
-using System.ComponentModel;
-using FluxSharp.UI.Stores;
+﻿using System.ComponentModel;
+using FluxSharp.Abstractions;
+using FluxSharp.Stores;
+using FluxSharp.UI;
 using Splat;
 
-namespace FluxSharp.UI.Components
+namespace FluxSharp.Components
 {
     public partial class MainSectionView : IFluxViewFor<ToDoStore>
     {

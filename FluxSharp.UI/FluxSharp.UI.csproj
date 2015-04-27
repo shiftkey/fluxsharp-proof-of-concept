@@ -7,8 +7,8 @@
     <ProjectGuid>{6C702C6B-2BD4-433D-AB86-0B5EF37B4F8E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FluxSharp.UI</RootNamespace>
-    <AssemblyName>FluxSharp.UI</AssemblyName>
+    <RootNamespace>FluxSharp</RootNamespace>
+    <AssemblyName>FluxSharp</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -84,8 +84,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Abstractions\IFluxControl.cs" />
+    <Compile Include="Abstractions\IFluxViewFor.cs" />
     <Compile Include="Abstractions\ObservableExtensions.cs" />
     <Compile Include="Actions\CheckedItemAction.cs" />
+    <Compile Include="Actions\CreateItemAction.cs" />
+    <Compile Include="Actions\ToggleAllCompletedAction.cs" />
+    <Compile Include="Actions\UncheckedItemAction.cs" />
+    <Compile Include="Actions\UpdateTextAction.cs" />
     <Compile Include="Components\HeaderView.xaml.cs">
       <DependentUpon>HeaderView.xaml</DependentUpon>
     </Compile>

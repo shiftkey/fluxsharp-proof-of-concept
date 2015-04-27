@@ -1,27 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluxSharp.UI.Actions;
+using FluxSharp.Abstractions;
+using FluxSharp.Actions;
 
-namespace FluxSharp.UI.Stores
+namespace FluxSharp.Stores
 {
     public class ToDoStore : DataStore
     {
-        Dictionary<string, ToDoItem> items
+        readonly Dictionary<string, ToDoItem> items
             = new Dictionary<string, ToDoItem>();
 
-        Random random = new Random();
+        readonly Random random = new Random();
 
-        public ToDoStore() : base()
+        public ToDoStore()
         {
             AppDispatcher.Register<CreateItemAction>(
                 create =>
             {
-                var text = create.Message.Trim();
-                if (!string.IsNullOrWhiteSpace(text))
+                var newText = create.Message.Trim();
+                if (!string.IsNullOrWhiteSpace(newText))
                 {
-                    Create(text);
-                    this.text = "";
+                    Create(newText);
+                    text = "";
                     EmitChange();
                 }
             });
@@ -59,7 +60,7 @@ namespace FluxSharp.UI.Stores
             AppDispatcher.Register<UpdateTextAction>(
                 update =>
                 {
-
+                    // TODO: implement this
                 });
 
             AppDispatcher.Register<ToggleAllCompletedAction>(
@@ -89,7 +90,7 @@ namespace FluxSharp.UI.Stores
             return text;
         }
 
-        void Create(string text)
+        void Create(string newText)
         {
             var now = DateTimeOffset.Now;
             var offset = Math.Floor(random.NextDouble() * 999999);
@@ -97,7 +98,7 @@ namespace FluxSharp.UI.Stores
             var id = string.Format("{0}{1}", now, offset);
             var item = new ToDoItem
             {
-                Text = text,
+                Text = newText,
                 Id = id,
                 IsComplete = false
             };

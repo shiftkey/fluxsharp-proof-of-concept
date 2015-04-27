@@ -4,11 +4,13 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
-using FluxSharp.UI.Actions;
-using FluxSharp.UI.Stores;
+using FluxSharp.Abstractions;
+using FluxSharp.Actions;
+using FluxSharp.Stores;
+using FluxSharp.UI;
 using Splat;
 
-namespace FluxSharp.UI.Components
+namespace FluxSharp.Components
 {
     public partial class HeaderView : IFluxViewFor<ToDoStore>
     {
@@ -22,7 +24,7 @@ namespace FluxSharp.UI.Components
             }
 
             Store = Locator.Current.GetService(typeof(ToDoStore)) as ToDoStore;
-            
+
             // TODO: should we make the API return an optional disposable?
             var disposable = new SerialDisposable();
 
@@ -49,8 +51,7 @@ namespace FluxSharp.UI.Components
                 disposable.Disposable = new CompositeDisposable(
                     createTextObs
                         .Subscribe(_ => this.Dispatch(new CreateItemAction(newToDo.Text))),
-                    allCheckedDisp
-                    );
+                    allCheckedDisp);
 
             });
 

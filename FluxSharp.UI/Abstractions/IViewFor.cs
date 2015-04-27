@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Windows;
+using FluxSharp.Abstractions;
 using Splat;
 
 namespace FluxSharp.UI
 {
-    public interface IFluxViewFor<T> where T : DataStore
-    {
-        T Store { get; }
-    }
-
-    public interface IFluxControl<T>
-    {
-
-    }
-
     public static class ViewExtensions
     {
         public static void OnChange<T>(this IFluxViewFor<T> view, Action<T> callback) where T : DataStore
@@ -28,7 +19,7 @@ namespace FluxSharp.UI
                 payload => callback(view.Store));
         }
 
-        public static void OnUpdated<T>(this IFluxControl<T> view, Action<T> callback) where T : class
+        public static void OnUpdated<T>(this IFluxControl view, Action<T> callback) where T : class
         {
             var control = view as FrameworkElement;
             if (control == null)
@@ -57,7 +48,7 @@ namespace FluxSharp.UI
             appDispatcher.Dispatch(payload);
         }
 
-        public static void Dispatch<TView, TPayload>(this IFluxControl<TView> view, TPayload payload)
+        public static void Dispatch<TPayload>(this IFluxControl view, TPayload payload)
         {
             var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
 

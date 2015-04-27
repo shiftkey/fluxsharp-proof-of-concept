@@ -1,10 +1,11 @@
 ﻿using System.Windows;
-using FluxSharp.UI.Stores;
+using FluxSharp.Abstractions;
+using FluxSharp.Stores;
 using Splat;
 
-namespace FluxSharp.UI
+namespace FluxSharp
 {
-    public partial class App : Application
+    public partial class App
     {
         public App()
         {

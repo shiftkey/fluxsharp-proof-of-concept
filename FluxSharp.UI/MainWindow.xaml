@@ -1,12 +1,12 @@
-﻿<Window x:Class="FluxSharp.UI.MainWindow"
+﻿<Window x:Class="FluxSharp.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FluxSharp.UI"
-        xmlns:ui="clr-namespace:FluxSharp.UI.Components"
+        xmlns:components="clr-namespace:FluxSharp.Components"
         mc:Ignorable="d"
         Title="To Do App"
         Height="525"
         Width="300">
+    <components:ToDoView />
 </Window>

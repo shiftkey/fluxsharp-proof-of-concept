@@ -1,4 +1,4 @@
-﻿namespace FluxSharp.UI.Stores
+﻿namespace FluxSharp.Stores
 {
     public class ToDoItem
     {
