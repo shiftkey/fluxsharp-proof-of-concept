@@ -94,7 +94,7 @@
     <Compile Include="Components\ToDoItemView.xaml.cs">
       <DependentUpon>ToDoItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Stores\DataStore.cs" />
+    <Compile Include="Abstractions\DataStore.cs" />
     <Compile Include="Abstractions\IViewFor.cs" />
     <Compile Include="Stores\ToDoItem.cs" />
     <Compile Include="Stores\ToDoStore.cs" />
@@ -121,7 +121,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Dispatcher.cs" />
+    <Compile Include="Abstractions\Dispatcher.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
