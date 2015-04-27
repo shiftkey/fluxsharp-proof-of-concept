@@ -52,7 +52,6 @@ namespace FluxSharp.Components
                     createTextObs
                         .Subscribe(_ => this.Dispatch(new CreateItemAction(newToDo.Text))),
                     allCheckedDisp);
-
             });
 
             // lol setup hax

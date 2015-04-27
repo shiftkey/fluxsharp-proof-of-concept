@@ -4,9 +4,9 @@ using Splat;
 
 namespace FluxSharp.Abstractions
 {
-    public abstract class DataStore
+    public abstract class Store
     {
-        protected DataStore()
+        protected Store()
         {
             AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
         }

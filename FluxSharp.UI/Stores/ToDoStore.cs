@@ -6,7 +6,7 @@ using FluxSharp.Actions;
 
 namespace FluxSharp.Stores
 {
-    public class ToDoStore : DataStore
+    public class ToDoStore : Store
     {
         readonly Dictionary<string, ToDoItem> items
             = new Dictionary<string, ToDoItem>();
@@ -19,12 +19,14 @@ namespace FluxSharp.Stores
                 create =>
             {
                 var newText = create.Message.Trim();
-                if (!string.IsNullOrWhiteSpace(newText))
+                if (string.IsNullOrWhiteSpace(newText))
                 {
-                    Create(newText);
-                    text = "";
-                    EmitChange();
+                    return;
                 }
+
+                Create(newText);
+                text = "";
+                EmitChange();
             });
 
             AppDispatcher.Register<CheckedItemAction>(

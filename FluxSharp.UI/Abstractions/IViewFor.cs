@@ -7,7 +7,7 @@ namespace FluxSharp.UI
 {
     public static class ViewExtensions
     {
-        public static void OnChange<T>(this IFluxViewFor<T> view, Action<T> callback) where T : DataStore
+        public static void OnChange<T>(this IFluxViewFor<T> view, Action<T> callback) where T : Store
         {
             var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
 
@@ -37,7 +37,7 @@ namespace FluxSharp.UI
             };
         }
 
-        public static void Dispatch<TView,TPayload>(this IFluxViewFor<TView> view, TPayload payload) where TView : DataStore
+        public static void Dispatch<TView,TPayload>(this IFluxViewFor<TView> view, TPayload payload) where TView : Store
         {
             var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
 
@@ -50,7 +50,7 @@ namespace FluxSharp.UI
             appDispatcher.Dispatch(payload);
         }
 
-        public static void EmitChange<TView>(this IFluxViewFor<TView> view) where TView : DataStore
+        public static void EmitChange<TView>(this IFluxViewFor<TView> view) where TView : Store
         {
             view.Dispatch(new ChangePayload());
         }
