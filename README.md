@@ -12,8 +12,8 @@ Tasks:
  - [x] can add items and mark them as done
  - [x] can check/uncheck all items in header
  - [ ] can edit task name
- - [ ] display count of tasks to complete in footer
- - [ ] clear completed tasks from list
+ - [x] display count of tasks to complete in footer
+ - [x] clear completed tasks from list
 
 After that, I'll dig into some more things that interest me:
 
