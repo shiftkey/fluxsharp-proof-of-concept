@@ -70,7 +70,12 @@ namespace FluxSharp.UI.Stores
                 });
         }
 
-        internal IEnumerable<ToDoItem> GetAll()
+        public bool GetAllChecked()
+        {
+            return items.Values.All(a => a.IsComplete);
+        }
+
+        public IEnumerable<ToDoItem> GetAll()
         {
             return items.Values.ToList();
         }

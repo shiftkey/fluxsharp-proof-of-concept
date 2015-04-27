@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 
 namespace FluxSharp.UI
 {
@@ -6,6 +7,11 @@ namespace FluxSharp.UI
     {
         T Store { get; }
         Dispatcher AppDispatcher { get; }
+    }
+
+    public interface IFluxControl<T>
+    {
+
     }
 
     public static class ViewExtensions
@@ -20,6 +26,22 @@ namespace FluxSharp.UI
 
             view.Store.AppDispatcher.Register<ChangePayload>(
                 payload => callback(view.Store));
+        }
+
+        public static void OnUpdated<T>(this IFluxControl<T> view, Action<T> callback) where T : class
+        {
+            var control = view as FrameworkElement;
+            if (control == null)
+            {
+                // TODO: we should fail the app
+                return;
+            }
+
+            control.DataContextChanged += (sender, args) =>
+            {
+                var newItem = args.NewValue as T;
+                callback(newItem);
+            };
         }
     }
 

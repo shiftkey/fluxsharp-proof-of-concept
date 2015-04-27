@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -25,25 +26,39 @@ namespace FluxSharp.UI.Components
             Store = Locator.Current.GetService(typeof(ToDoStore)) as ToDoStore;
             AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
 
+            // TODO: should we make the API return an optional disposable?
+            var disposable = new SerialDisposable();
+
             this.OnChange(store =>
             {
                 newToDo.Text = store.GetText();
+
+                var createTextObs = Observable.Merge(
+                    newToDo.Events().LostFocus
+                        .SelectUnit(),
+                    newToDo.Events().KeyDown
+                        .Where(x => x.Key == Key.Enter)
+                        .SelectUnit());
+
+                var allTasksChecked = store.GetAllChecked();
+                allChecked.IsChecked = allTasksChecked;
+
+                var allCheckedDisp = allTasksChecked
+                    ? Observable.FromEventPattern<RoutedEventArgs>(allChecked, "UnChecked")
+                        .Subscribe(_ => AppDispatcher.Dispatch(new ToggleAllCompletedAction(false)))
+                    : Observable.FromEventPattern<RoutedEventArgs>(allChecked, "Checked")
+                        .Subscribe(_ => AppDispatcher.Dispatch(new ToggleAllCompletedAction(true)));
+
+                disposable.Disposable = new CompositeDisposable(
+                    createTextObs
+                        .Subscribe(_ => AppDispatcher.Dispatch(new CreateItemAction(newToDo.Text))),
+                    allCheckedDisp
+                    );
+
             });
 
-            this.WhenActivated(d =>
-            {
-                var createTextObs = Observable.Merge(
-                    newToDo.Events().LostFocus.SelectUnit(),
-                    newToDo.Events().KeyDown
-                    .Where(x => x.Key == Key.Enter)
-                    .SelectUnit());
-                
-                d(createTextObs
-                    .Subscribe(_ =>
-                    {
-                        AppDispatcher.Dispatch(new CreateItemAction(newToDo.Text));
-                    }));
-            });
+            // lol setup hax
+            Store.EmitChange();
         }
 
         public ToDoStore Store { get; set; }

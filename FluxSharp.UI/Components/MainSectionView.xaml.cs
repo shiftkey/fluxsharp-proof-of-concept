@@ -23,6 +23,9 @@ namespace FluxSharp.UI.Components
             {
                 todos.ItemsSource = store.GetAll();
             });
+
+            // lol setup hax
+            Store.EmitChange();
         }
 
         public Dispatcher AppDispatcher { get; private set; }
