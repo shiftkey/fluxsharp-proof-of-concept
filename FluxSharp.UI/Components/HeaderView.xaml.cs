@@ -6,8 +6,6 @@ using System.Windows;
 using System.Windows.Input;
 using FluxSharp.UI.Actions;
 using FluxSharp.UI.Stores;
-using FluxSharp.UI.ViewModels;
-using ReactiveUI;
 using Splat;
 
 namespace FluxSharp.UI.Components

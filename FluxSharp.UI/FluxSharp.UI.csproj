@@ -35,10 +35,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ReactiveUI, Version=6.4.0.1, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\reactiveui-core.6.4.0.1\lib\Net45\ReactiveUI.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="ReactiveUI.Events, Version=6.4.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\reactiveui-events.6.4.0.1\lib\net45\ReactiveUI.Events.dll</HintPath>
       <Private>True</Private>
@@ -105,7 +101,6 @@
     <Compile Include="Components\ToDoView.xaml.cs">
       <DependentUpon>ToDoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\HeaderViewModel.cs" />
     <Page Include="Components\HeaderView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
