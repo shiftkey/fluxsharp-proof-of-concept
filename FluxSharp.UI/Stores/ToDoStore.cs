@@ -107,7 +107,7 @@ namespace FluxSharp.Stores
             var now = DateTimeOffset.Now;
             var offset = Math.Floor(random.NextDouble() * 999999);
 
-            var id = string.Format("{0}{1}", now, offset);
+            var id = string.Format("{0}-{1}", now, offset);
             var item = new ToDoItem
             {
                 Text = newText,
