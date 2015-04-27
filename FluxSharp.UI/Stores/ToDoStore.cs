@@ -11,7 +11,7 @@ namespace FluxSharp.UI.Stores
 
         Random random = new Random();
 
-        public ToDoStore()
+        public ToDoStore() : base()
         {
             AppDispatcher.Register<CreateItemAction>(
                 create =>
@@ -20,6 +20,7 @@ namespace FluxSharp.UI.Stores
                 if (!string.IsNullOrWhiteSpace(text))
                 {
                     Create(text);
+                    this.text = "";
                     EmitChange();
                 }
             });
@@ -41,10 +42,11 @@ namespace FluxSharp.UI.Stores
         {
             return items.Values;
         }
-        
+
+        string text = "";
         public string GetText()
         {
-            throw new NotImplementedException();
+            return "";
         }
 
         void Create(string text)

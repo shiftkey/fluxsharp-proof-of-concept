@@ -1,28 +1,38 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using FluxSharp.UI.Stores;
+using ReactiveUI;
 
 namespace FluxSharp.UI.Components
 {
-    /// <summary>
-    /// Interaction logic for ToDoItemView.xaml
-    /// </summary>
-    public partial class ToDoItemView : UserControl
+    public partial class ToDoItemView : IViewFor<ToDoItem>
     {
         public ToDoItemView()
         {
             InitializeComponent();
+
+            DataContextChanged += (s, e) => ViewModel = e.NewValue as ToDoItem;
+
+            this.WhenActivated(d =>
+            {
+                d(this.OneWayBind(ViewModel, vm => vm.Text, v => v.text.Text));
+            });
+        }
+
+        public ToDoItem ViewModel
+        {
+            get { return (ToDoItem)GetValue(ViewModelProperty); }
+            set { SetValue(ViewModelProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for ViewModel.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty ViewModelProperty =
+            DependencyProperty.Register("ViewModel", typeof(ToDoItem), typeof(ToDoItemView), new PropertyMetadata(null));
+
+        object IViewFor.ViewModel
+        {
+            get { return ViewModel; }
+            set { ViewModel = value as ToDoItem; }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using FluxSharp.UI.Stores;
 using Splat;
 
 namespace FluxSharp.UI
@@ -8,8 +9,10 @@ namespace FluxSharp.UI
         public App()
         {
             var dispatcher = new Dispatcher();
-
             Locator.CurrentMutable.RegisterConstant(dispatcher, typeof(Dispatcher));
+
+            var todoStore = new ToDoStore();
+            Locator.CurrentMutable.RegisterConstant(todoStore, typeof(ToDoStore));
         }
     }
 }
