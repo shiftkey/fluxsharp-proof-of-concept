@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Windows;
+using Splat;
 
 namespace FluxSharp.UI
 {
     public interface IFluxViewFor<T> where T : DataStore
     {
         T Store { get; }
-        Dispatcher AppDispatcher { get; }
     }
 
     public interface IFluxControl<T>
@@ -43,6 +43,33 @@ namespace FluxSharp.UI
                 callback(newItem);
             };
         }
+
+        public static void Dispatch<TView,TPayload>(this IFluxViewFor<TView> view, TPayload payload) where TView : DataStore
+        {
+            var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
+
+            if (appDispatcher == null)
+            {
+                // TODO: we should fail the app
+                return;
+            }
+
+            appDispatcher.Dispatch(payload);
+        }
+
+        public static void Dispatch<TView, TPayload>(this IFluxControl<TView> view, TPayload payload)
+        {
+            var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
+
+            if (appDispatcher == null)
+            {
+                // TODO: we should fail the app
+                return;
+            }
+
+            appDispatcher.Dispatch(payload);
+        }
+
     }
 
 }

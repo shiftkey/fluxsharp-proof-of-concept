@@ -4,7 +4,6 @@ using System.Reactive.Linq;
 using System.Windows;
 using FluxSharp.UI.Actions;
 using FluxSharp.UI.Stores;
-using Splat;
 
 namespace FluxSharp.UI.Components
 {
@@ -13,12 +12,8 @@ namespace FluxSharp.UI.Components
         public ToDoItemView()
         {
             InitializeComponent();
-
-            AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
-
+            
             SerialDisposable disposable = new SerialDisposable();
-
-            // TODO: a better abstraction here?
 
             this.OnUpdated(viewModel =>
             {
@@ -27,12 +22,10 @@ namespace FluxSharp.UI.Components
 
                 disposable.Disposable = isChecked.IsChecked == false
                     ? Observable.FromEventPattern<RoutedEventArgs>(isChecked, "Checked")
-                        .Subscribe(_ => AppDispatcher.Dispatch(new CheckedItemAction(viewModel.Id)))
+                        .Subscribe(_ => this.Dispatch(new CheckedItemAction(viewModel.Id)))
                     : Observable.FromEventPattern<RoutedEventArgs>(isChecked, "Unchecked")
-                        .Subscribe(_ => AppDispatcher.Dispatch(new UncheckedItemAction(viewModel.Id)));
+                        .Subscribe(_ => this.Dispatch(new UncheckedItemAction(viewModel.Id)));
             });
         }
-
-        public Dispatcher AppDispatcher { get; private set; }
     }
 }

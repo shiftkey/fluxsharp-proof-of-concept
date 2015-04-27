@@ -12,7 +12,7 @@ using Splat;
 
 namespace FluxSharp.UI.Components
 {
-    public partial class HeaderView : IViewFor<HeaderViewModel>, IFluxViewFor<ToDoStore>
+    public partial class HeaderView : IFluxViewFor<ToDoStore>
     {
         public HeaderView()
         {
@@ -24,8 +24,7 @@ namespace FluxSharp.UI.Components
             }
 
             Store = Locator.Current.GetService(typeof(ToDoStore)) as ToDoStore;
-            AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
-
+            
             // TODO: should we make the API return an optional disposable?
             var disposable = new SerialDisposable();
 
@@ -45,13 +44,13 @@ namespace FluxSharp.UI.Components
 
                 var allCheckedDisp = allTasksChecked
                     ? Observable.FromEventPattern<RoutedEventArgs>(allChecked, "Unchecked")
-                        .Subscribe(_ => AppDispatcher.Dispatch(new ToggleAllCompletedAction(false)))
+                        .Subscribe(_ => this.Dispatch(new ToggleAllCompletedAction(false)))
                     : Observable.FromEventPattern<RoutedEventArgs>(allChecked, "Checked")
-                        .Subscribe(_ => AppDispatcher.Dispatch(new ToggleAllCompletedAction(true)));
+                        .Subscribe(_ => this.Dispatch(new ToggleAllCompletedAction(true)));
 
                 disposable.Disposable = new CompositeDisposable(
                     createTextObs
-                        .Subscribe(_ => AppDispatcher.Dispatch(new CreateItemAction(newToDo.Text))),
+                        .Subscribe(_ => this.Dispatch(new CreateItemAction(newToDo.Text))),
                     allCheckedDisp
                     );
 
@@ -62,24 +61,5 @@ namespace FluxSharp.UI.Components
         }
 
         public ToDoStore Store { get; set; }
-
-        public Dispatcher AppDispatcher { get; set; }
-
-
-        // TODO: :fire: this dependency
-        public HeaderViewModel ViewModel
-        {
-            get { return (HeaderViewModel)GetValue(ViewModelProperty); }
-            set { SetValue(ViewModelProperty, value); }
-        }
-
-        public static readonly DependencyProperty ViewModelProperty =
-            DependencyProperty.Register("ViewModel", typeof(HeaderViewModel), typeof(HeaderView), new PropertyMetadata(null));
-
-        object IViewFor.ViewModel
-        {
-            get { return ViewModel; }
-            set { ViewModel = value as HeaderViewModel; }
-        }
     }
 }

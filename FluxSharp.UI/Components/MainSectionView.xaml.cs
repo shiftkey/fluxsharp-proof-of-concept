@@ -17,8 +17,7 @@ namespace FluxSharp.UI.Components
             }
 
             Store = Locator.Current.GetService(typeof(ToDoStore)) as ToDoStore;
-            AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
-
+            
             this.OnChange(store =>
             {
                 todos.ItemsSource = store.GetAll();
@@ -27,8 +26,6 @@ namespace FluxSharp.UI.Components
             // lol setup hax
             Store.EmitChange();
         }
-
-        public Dispatcher AppDispatcher { get; private set; }
 
         public ToDoStore Store { get; set; }
     }
