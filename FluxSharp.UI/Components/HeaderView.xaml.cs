@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
+using FluxSharp.UI.Actions;
 using FluxSharp.UI.Stores;
 using FluxSharp.UI.ViewModels;
 using ReactiveUI;

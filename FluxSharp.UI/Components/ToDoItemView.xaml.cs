@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Reactive.Linq;
 using System.Windows;
+using FluxSharp.UI.Actions;
 using FluxSharp.UI.Stores;
 using ReactiveUI;
+using Splat;
 
 namespace FluxSharp.UI.Components
 {
@@ -13,11 +16,30 @@ namespace FluxSharp.UI.Components
 
             DataContextChanged += (s, e) => ViewModel = e.NewValue as ToDoItem;
 
+            AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
+
             this.WhenActivated(d =>
             {
                 d(this.OneWayBind(ViewModel, vm => vm.Text, v => v.text.Text));
+
+                // TODO: we should only need to bind one callback here
+
+                var checkedObs = Observable.FromEventPattern<RoutedEventArgs>(isChecked, "Checked");
+                d(checkedObs.Subscribe(_ =>
+                {
+                    AppDispatcher.Dispatch(new CheckedItemAction(ViewModel.Id));
+                }));
+
+                var uncheckedObs = Observable.FromEventPattern<RoutedEventArgs>(isChecked, "Unchecked");
+                d(uncheckedObs.Subscribe(_ =>
+                {
+                    AppDispatcher.Dispatch(new UncheckedItemAction(ViewModel.Id));
+                }));
+
             });
         }
+
+        public Dispatcher AppDispatcher { get; private set; }
 
         public ToDoItem ViewModel
         {

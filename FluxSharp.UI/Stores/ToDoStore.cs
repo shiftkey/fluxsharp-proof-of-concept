@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using FluxSharp.UI.Actions;
 
 namespace FluxSharp.UI.Stores
 {
@@ -25,6 +26,34 @@ namespace FluxSharp.UI.Stores
                 }
             });
 
+            AppDispatcher.Register<CheckedItemAction>(
+                action =>
+                {
+                    if (items.ContainsKey(action.Id))
+                    {
+                        var found = items[action.Id];
+                        if (found.IsComplete)
+                        {
+                            System.Diagnostics.Debug.Fail("Item is not in a valid state for this action");
+                        }
+                        found.IsComplete = true;
+                    }
+                });
+
+            AppDispatcher.Register<UncheckedItemAction>(
+                action =>
+                {
+                    if (items.ContainsKey(action.Id))
+                    {
+                        var found = items[action.Id];
+                        if (!found.IsComplete)
+                        {
+                            System.Diagnostics.Debug.Fail("Item is not in a valid state for this action");
+                        }
+                        found.IsComplete = false;
+                    }
+                });
+
             AppDispatcher.Register<UpdateTextAction>(
                 update =>
                 {
@@ -46,7 +75,7 @@ namespace FluxSharp.UI.Stores
         string text = "";
         public string GetText()
         {
-            return "";
+            return text;
         }
 
         void Create(string text)
@@ -66,31 +95,4 @@ namespace FluxSharp.UI.Stores
         }
     }
 
-
-    public class CreateItemAction
-    {
-        public CreateItemAction(string message)
-        {
-            Message = message;
-        }
-
-        public string Message { get; private set; }
-    }
-
-    public class UpdateTextAction
-    {
-        public UpdateTextAction(string id, string message)
-        {
-            Id = id;
-            Message = message;
-        }
-
-        public string Id { get; private set; }
-        public string Message { get; private set; }
-    }
-
-    public class ToggleAllCompletedAction
-    {
-
-    }
 }
