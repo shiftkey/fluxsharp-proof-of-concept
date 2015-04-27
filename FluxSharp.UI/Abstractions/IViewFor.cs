@@ -9,13 +9,15 @@ namespace FluxSharp.UI
     {
         public static void OnChange<T>(this IFluxViewFor<T> view, Action<T> callback) where T : DataStore
         {
-            // TODO: defer this registration until we have a store
-            if (view.Store == null)
+            var appDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
+
+            if (appDispatcher == null)
             {
+                // TODO: we should fail the app
                 return;
             }
 
-            view.Store.AppDispatcher.Register<ChangePayload>(
+            appDispatcher.Register<ChangePayload>(
                 payload => callback(view.Store));
         }
 
@@ -46,6 +48,11 @@ namespace FluxSharp.UI
             }
 
             appDispatcher.Dispatch(payload);
+        }
+
+        public static void EmitChange<TView>(this IFluxViewFor<TView> view) where TView : DataStore
+        {
+            view.Dispatch(new ChangePayload());
         }
 
         public static void Dispatch<TPayload>(this IFluxControl view, TPayload payload)

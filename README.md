@@ -21,3 +21,27 @@ After that, I'll dig into some more things that interest me:
  - [ ] dealing with complex stores - composition?
  - [ ] hiding away the plumbing of Splat
  - [ ] cleanup the hacks scattered everywhere
+
+## Components
+
+**Dispatcher:** - not to be confused with WPF's `Dispatcher` - a Flux Dispatcher
+is used to allow components to register callbacks for specific events, and then
+other components can dispatch events. Rather than use magic strings, I've settled
+on using POCO classes for these events - it feels a bit CQRS-y, but that's fine
+with me so far.
+
+**Stores:** - the store contains the logic and state for the application. It subscribes
+to specific events and, after updating itself, will signal to the view that changes
+are available for consumption.
+
+**View:** - in Flux the view is responsible for two things:
+
+ - receiving new changes and updating the UI
+ - handling user interactions and raising new events on the dispatcher
+
+The goal with views is to be as immutable as possible. I was skeptical at first, but
+am finding it rather pleasant to make these views as dumb as possible.
+
+I've not brought over the React `render` behaviour because I don't really care
+about it at this stage - too much work for questionable benefits, and with XAML being
+fairly declarative already I'm not really interested in reinventing that wheel.

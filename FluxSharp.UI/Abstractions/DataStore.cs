@@ -1,4 +1,5 @@
-﻿using FluxSharp.UI;
+﻿using System;
+using FluxSharp.UI;
 using Splat;
 
 namespace FluxSharp.Abstractions
@@ -16,10 +17,5 @@ namespace FluxSharp.Abstractions
         {
             AppDispatcher.Dispatch(new ChangePayload());
         }
-    }
-
-    public class ChangePayload
-    {
-
     }
 }

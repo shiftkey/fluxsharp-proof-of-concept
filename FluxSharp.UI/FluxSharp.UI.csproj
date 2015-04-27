@@ -84,6 +84,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Abstractions\ChangePayload.cs" />
     <Compile Include="Abstractions\IFluxControl.cs" />
     <Compile Include="Abstractions\IFluxViewFor.cs" />
     <Compile Include="Abstractions\ObservableExtensions.cs" />

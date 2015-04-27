@@ -56,7 +56,7 @@ namespace FluxSharp.Components
             });
 
             // lol setup hax
-            Store.EmitChange();
+            this.EmitChange();
         }
 
         public ToDoStore Store { get; private set; }
