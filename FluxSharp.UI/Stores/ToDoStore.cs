@@ -74,6 +74,16 @@ namespace FluxSharp.Stores
                     }
                     EmitChange();
                 });
+
+            AppDispatcher.Register<ClearCompletedTasksAction>(
+                action =>
+                {
+                    foreach (var item in items.Where(x => x.Value.IsComplete).ToList())
+                    {
+                        items.Remove(item.Key);
+                    }
+                    EmitChange();
+                });
         }
 
         public bool GetAllChecked()
