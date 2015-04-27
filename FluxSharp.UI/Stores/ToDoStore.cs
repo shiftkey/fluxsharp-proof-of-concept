@@ -1,10 +1,19 @@
-﻿namespace FluxSharp.UI.Stores
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace FluxSharp.UI.Stores
 {
     public class ToDoStore : DataStore
     {
+        Dictionary<string, ToDoItem> items
+            = new Dictionary<string, ToDoItem>();
+
+        Random random = new Random();
+
         public ToDoStore()
         {
-            AppDispatcher.Register<CreateAction>(
+            AppDispatcher.Register<CreateItemAction>(
                 create =>
             {
                 var text = create.Message.Trim();
@@ -28,20 +37,37 @@
                 });
         }
 
-
-
-
-        private void Create(string text)
+        internal IEnumerable<ToDoItem> GetAll()
         {
-            // TODO: add a new item to the collection
+            return items.Values;
+        }
+        
+        public string GetText()
+        {
+            throw new NotImplementedException();
+        }
+
+        void Create(string text)
+        {
+            var now = DateTimeOffset.Now;
+            var offset = Math.Floor(random.NextDouble() * 999999);
+
+            var id = string.Format("{0}{1}", now, offset);
+            var item = new ToDoItem
+            {
+                Text = text,
+                Id = id,
+                IsComplete = false
+            };
+
+            items[id] = item;
         }
     }
 
 
-
-    public class CreateAction
+    public class CreateItemAction
     {
-        public CreateAction(string message)
+        public CreateItemAction(string message)
         {
             Message = message;
         }
@@ -51,13 +77,13 @@
 
     public class UpdateTextAction
     {
-        public UpdateTextAction(int id, string message)
+        public UpdateTextAction(string id, string message)
         {
             Id = id;
             Message = message;
         }
 
-        public int Id { get; private set; }
+        public string Id { get; private set; }
         public string Message { get; private set; }
     }
 

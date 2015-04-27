@@ -5,9 +5,9 @@ using Splat;
 
 namespace FluxSharp.UI.Components
 {
-    public partial class ToDoView : IFluxViewFor<ToDoStore>
+    public partial class MainSectionView : IFluxViewFor<ToDoStore>
     {
-        public ToDoView()
+        public MainSectionView()
         {
             InitializeComponent();
 
@@ -19,12 +19,9 @@ namespace FluxSharp.UI.Components
             Store = Locator.Current.GetService(typeof(ToDoStore)) as ToDoStore;
             AppDispatcher = Locator.Current.GetService(typeof(Dispatcher)) as Dispatcher;
 
-            header.Store = Store;
-            main.Store = Store;
-
             this.OnChange(store =>
             {
-                // TODO: ???
+                todos.ItemsSource = store.GetAll();
             });
         }
 

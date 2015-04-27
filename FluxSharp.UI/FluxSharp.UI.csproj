@@ -35,6 +35,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ReactiveUI, Version=6.4.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\reactiveui-core.6.4.0.1\lib\Net45\ReactiveUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="ReactiveUI.Events, Version=6.4.0.1, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\reactiveui-events.6.4.0.1\lib\net45\ReactiveUI.Events.dll</HintPath>
       <Private>True</Private>
@@ -61,6 +65,10 @@
       <HintPath>..\packages\Rx-PlatformServices.2.2.5\lib\net45\System.Reactive.PlatformServices.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Reactive.Windows.Threading, Version=2.2.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Rx-XAML.2.2.5\lib\net45\System.Reactive.Windows.Threading.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -79,16 +87,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Abstractions\ObservableExtensions.cs" />
     <Compile Include="Components\HeaderView.xaml.cs">
       <DependentUpon>HeaderView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Components\MainSectionView.xaml.cs">
+      <DependentUpon>MainSectionView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Components\ToDoItemView.xaml.cs">
+      <DependentUpon>ToDoItemView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Stores\DataStore.cs" />
     <Compile Include="Abstractions\IViewFor.cs" />
+    <Compile Include="Stores\ToDoItem.cs" />
     <Compile Include="Stores\ToDoStore.cs" />
     <Compile Include="Components\ToDoView.xaml.cs">
       <DependentUpon>ToDoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\HeaderViewModel.cs" />
     <Page Include="Components\HeaderView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\MainSectionView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Components\ToDoItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

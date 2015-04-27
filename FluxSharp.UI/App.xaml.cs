@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using Splat;
 
 namespace FluxSharp.UI
 {
@@ -12,12 +7,9 @@ namespace FluxSharp.UI
     {
         public App()
         {
-            AppDispatcher = new Dispatcher();
+            var dispatcher = new Dispatcher();
 
-
-
+            Locator.CurrentMutable.RegisterConstant(dispatcher, typeof(Dispatcher));
         }
-
-        public static Dispatcher AppDispatcher { get; private set; }
     }
 }

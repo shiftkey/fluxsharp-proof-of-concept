@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using FluxSharp.UI.Components;
+using FluxSharp.UI.Stores;
 
 namespace FluxSharp.UI
 {
@@ -7,6 +9,12 @@ namespace FluxSharp.UI
         public MainWindow()
         {
             InitializeComponent();
+
+            var app = new ToDoView()
+            {
+                Store = new ToDoStore()
+            };
+            Content = app;
         }
     }
 }
