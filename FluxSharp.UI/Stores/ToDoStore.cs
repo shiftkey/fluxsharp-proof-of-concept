@@ -59,10 +59,35 @@ namespace FluxSharp.Stores
                     }
                 });
 
-            AppDispatcher.Register<UpdateTextAction>(
-                update =>
+            AppDispatcher.Register<EditItemAction>(
+                action =>
                 {
-                    // TODO: implement this
+                    if (items.ContainsKey(action.Id))
+                    {
+                        var found = items[action.Id];
+                        if (found.IsEditable)
+                        {
+                            System.Diagnostics.Debug.Fail("Item is not in a valid state for this action");
+                        }
+                        found.IsEditable = true;
+                        EmitChange();
+                    }
+                });
+
+            AppDispatcher.Register<SaveItemAction>(
+                action =>
+                {
+                    if (items.ContainsKey(action.Id))
+                    {
+                        var found = items[action.Id];
+                        if (!found.IsEditable)
+                        {
+                            System.Diagnostics.Debug.Fail("Item is not in a valid state for this action");
+                        }
+                        found.Text = action.Text;
+                        found.IsEditable = false;
+                        EmitChange();
+                    }
                 });
 
             AppDispatcher.Register<ToggleAllCompletedAction>(
