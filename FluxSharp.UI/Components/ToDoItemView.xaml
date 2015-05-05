@@ -7,15 +7,35 @@
              Height="25">
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*" MinWidth="240" />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
+        <Button Content="Edit"
+                Margin="3"
+                x:Name="editButton" />
+ 
+        <Button Content="Save"
+                Visibility="Collapsed"
+                Margin="3"
+                x:Name="saveButton" />
+
         <TextBlock x:Name="text"
-                   HorizontalAlignment="Left" VerticalAlignment="Center"
+                   Grid.Column="1"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"
                    Text="this is a task"
                    Margin="6,0"/>
+
+        <TextBox x:Name="edit"
+                 Grid.Column="1"
+                 HorizontalAlignment="Left"
+                 VerticalAlignment="Center"
+                 Text="this is a task"
+                 Margin="6,0"/>
+
         <CheckBox x:Name="isChecked"
-                  Grid.Column="1"
+                  Grid.Column="2"
                   HorizontalAlignment="Right"
                   VerticalAlignment="Center" 
                   Margin="0,0,6,0"/>
