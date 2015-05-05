@@ -90,9 +90,9 @@
     <Compile Include="Abstractions\ObservableExtensions.cs" />
     <Compile Include="Actions\CheckedItemAction.cs" />
     <Compile Include="Actions\CreateItemAction.cs" />
+    <Compile Include="Actions\SaveItemAction.cs" />
     <Compile Include="Actions\ToggleAllCompletedAction.cs" />
     <Compile Include="Actions\UncheckedItemAction.cs" />
-    <Compile Include="Actions\UpdateTextAction.cs" />
     <Compile Include="Actions\ClearCompletedTasksAction.cs" />
     <Compile Include="Components\FooterView.xaml.cs">
       <DependentUpon>FooterView.xaml</DependentUpon>
