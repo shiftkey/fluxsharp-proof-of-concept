@@ -2,6 +2,7 @@
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Windows;
+using System.Windows.Input;
 using FluxSharp.Abstractions;
 using FluxSharp.Actions;
 using FluxSharp.Stores;
@@ -18,7 +19,7 @@ namespace FluxSharp.Components
 
             this.OnUpdated<ToDoItem>(viewModel =>
             {
-                IDisposable buttonClick;
+                IDisposable buttonClick, userTyped;
 
                 // TODO: need a cancel button here
 
@@ -30,6 +31,12 @@ namespace FluxSharp.Components
                     buttonClick = Observable.FromEventPattern<RoutedEventArgs>(saveButton, "Click")
                         .Subscribe(_ => this.Dispatch(new SaveItemAction(viewModel.Id, edit.Text)));
 
+                    userTyped = 
+                        edit.Events().KeyDown
+                            .Where(x => x.Key == Key.Enter)
+                            .SelectUnit()
+                            .Subscribe(_ => this.Dispatch(new SaveItemAction(viewModel.Id, edit.Text)));
+
                     edit.Visibility = Visibility.Visible;
                     text.Visibility = Visibility.Collapsed;
                 }
@@ -37,9 +44,11 @@ namespace FluxSharp.Components
                 {
                     editButton.Visibility = Visibility.Visible;
                     saveButton.Visibility = Visibility.Collapsed;
-                    
+
                     buttonClick = Observable.FromEventPattern<RoutedEventArgs>(editButton, "Click")
                         .Subscribe(_ => this.Dispatch(new EditItemAction(viewModel.Id)));
+
+                    userTyped = Disposable.Empty;
 
                     edit.Visibility = Visibility.Collapsed;
                     text.Visibility = Visibility.Visible;
@@ -56,7 +65,7 @@ namespace FluxSharp.Components
                     : Observable.FromEventPattern<RoutedEventArgs>(isChecked, "Unchecked")
                         .Subscribe(_ => this.Dispatch(new UncheckedItemAction(viewModel.Id)));
 
-                disposable.Disposable = new CompositeDisposable(buttonClick, checkedChanged);
+                disposable.Disposable = new CompositeDisposable(buttonClick, userTyped, checkedChanged);
             });
         }
     }
