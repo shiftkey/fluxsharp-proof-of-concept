@@ -11,7 +11,7 @@ Tasks:
 
  - [x] can add items and mark them as done
  - [x] can check/uncheck all items in header
- - [ ] can edit task name
+ - [x] can edit task name
  - [x] display count of tasks to complete in footer
  - [x] clear completed tasks from list
 
