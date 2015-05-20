@@ -1,7 +1,7 @@
 # Flux C# Proof of Concept
 
 This is the result of me wrapping my head around Flux/React concepts -
-by implementing a simple library in C# to emulate the behaviour.
+by implementing a simple library in C# to emulate the behavior.
 
 It's super-rough, but as a first step I'm porting the
 [Flux Todo App](https://github.com/facebook/flux/blob/2e6238c632dcaf276a303bc3239d7c273b94f9fd/docs/TodoList.md)
@@ -95,6 +95,6 @@ public partial class HeaderView : IFluxViewFor<ToDoStore>
 The goal with views is to be as immutable as possible. I was skeptical at first, but
 am finding it rather pleasant to make these views as dumb as possible.
 
-I've not brought over the React `render` behaviour because I don't really care
+I've not brought over the React `render` behavior because I don't really care
 about it at this stage - too much work for questionable benefits, and with XAML being
 fairly declarative already I'm not really interested in reinventing that wheel.
